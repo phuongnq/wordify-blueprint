@@ -21,9 +21,10 @@ import { useGlobalContext } from './context';
 
 export default function BaseLayout({ siteTitle, socialLinks, children }) {
   const [{ theme }] = useGlobalContext();
+  const title = 'Wordify Crafter CMS'
   return (
     <div className={`wrap theme-${theme}`}>
-      <Header siteTitle={siteTitle} socialLinks={socialLinks}/>
+      <Header siteTitle={title} socialLinks={socialLinks}/>
       <div className="wrap">
         {children}
       </div>

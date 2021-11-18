@@ -20,6 +20,7 @@ export function fetchQuery(
   operation,
   variables
 ) {
+  console.log(crafterConfig);
   return fetch(`${crafterConfig.graphQLServer}?crafterSite=${crafterConfig.site}`, {
     method: 'POST',
     headers: {

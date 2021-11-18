@@ -67,9 +67,9 @@ if (typeof document !== 'undefined') {
 }
 
 export const crafterConfig = {
-  baseUrl: process.env.REACT_APP_CRAFTERCMS_BASE_URL,
+  baseUrl: process.env.NEXT_PUBLIC_REACT_APP_CRAFTERCMS_BASE_URL,
   site,
-  graphQLServer: process.env.REACT_APP_GRAPHQL_SERVER
+  graphQLServer: process.env.NEXT_PUBLIC_REACT_APP_GRAPHQL_SERVER
 };
 
 // TODO: To be moved to sdk and/or removed

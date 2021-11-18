@@ -16,7 +16,6 @@
 
 import React, { useEffect } from 'react';
 import Router from './Router';
-import CircularProgressSpinner from './CircularProgressSpinner';
 import { GlobalContextProvider } from './context';
 import AppIntl from './AppIntl';
 import { isAuthoring } from './utils';

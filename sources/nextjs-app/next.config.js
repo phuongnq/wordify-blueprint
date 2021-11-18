@@ -6,6 +6,10 @@ module.exports = {
         source: '/static-assets/:path*',
         destination: 'http://localhost:8080/static-assets/:path*',
       },
+      {
+        source: '/api/1/site/graphql:path*',
+        destination: 'http://localhost:8080/api/1/site/graphql:path*',
+      }
     ]
   },
 }

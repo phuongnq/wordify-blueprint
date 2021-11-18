@@ -14,21 +14,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import DynamicRoute from './DynamicRoute';
 
-export default function Router() {
-  const router = useRouter();
-
+function SafeHydrate({ children }) {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/category/:id?" component={DynamicRoute} />
-        <Route path="/tag/:id?" component={DynamicRoute} />
-        <Route path="/*" component={DynamicRoute} />
-      </Switch>
-    </BrowserRouter>
+    <div suppressHydrationWarning>
+      {typeof document === 'undefined' ? null : children}
+    </div>
+  )
+}
+
+export default function Router() {
+  return (
+    <SafeHydrate>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/category/:id?" component={DynamicRoute} />
+          <Route path="/tag/:id?" component={DynamicRoute} />
+          <Route path="/*" component={DynamicRoute} />
+        </Switch>
+      </BrowserRouter>
+    </SafeHydrate>
   );
 }

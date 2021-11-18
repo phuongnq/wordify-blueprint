@@ -16,6 +16,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useNavigation } from '../shared/hooks';
 import SearchForm from '../shared/SearchForm';
 import { useGlobalContext } from '../shared/context';
@@ -78,7 +79,7 @@ export default function Header({ siteTitle, socialLinks }) {
               onClick={toggleNavBar}
               aria-expanded="false" aria-controls="navbarMenu"
             ><span className="burger-lines"></span></a>
-            <h1 className="site-logo"><Link href="/">{ siteTitle }</Link></h1>
+            <h1 className="site-logo"><Link href="/">{siteTitle}</Link></h1>
           </div>
         </div>
       </div>

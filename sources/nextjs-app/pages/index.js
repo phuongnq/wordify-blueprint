@@ -14,25 +14,115 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../shared/App';
-// import * as serviceWorker from './serviceWorker';
+import React, { useState } from 'react';
+import BaseLayout from '../shared/BaseLayout';
+import Slider from '../components/Slider';
+import { FormattedMessage } from 'react-intl';
+import PostCard from '../shared/PostCard';
+import SidebarBios from '../shared/SidebarBios';
+import SidebarSearch from '../shared/SidebarSearch';
+import RecentPostsAside from '../shared/RecentPostsAside';
+import { SidebarCategories, SidebarTags } from '../shared/SidebarTaxonomies';
+import { usePosts } from '../shared/hooks';
+import Paginate from '../shared/Paginate';
 
-// On occasions, Crafter's jQuery overrides the site's jQuery
-// briefly. This will get fixed on next releases of Crafter CMS,
-// but for now, adding jQuery to the global context to 'cache' it.
-export default function Index() {
-  let jQuery;
-  if (typeof window !== 'undefined') {
-    jQuery = window.jQuery;
-  }
+function Home(props) {
+  const {
+    model,
+    model: {
+      craftercms: {
+        path
+      },
+      slider_o
+    },
+    meta: {
+      siteTitle,
+      socialLinks
+    }
+  } = props;
+  const [paginationData, setPaginationData] = useState({
+    itemsPerPage: 8,
+    currentPage: 0
+  });
+  const posts = usePosts(paginationData);
+
   return (
-    <App jQuery={jQuery} />
-  )
+    <BaseLayout siteTitle={siteTitle} socialLinks={socialLinks}>
+      <section className="site-section pt-5 pb-5">
+        <div className="container">
+          <div className="row">
+            {
+              slider_o?.map((slider, index) =>
+                <div className="col-md-12" key={index}>
+                  <Slider model={slider} parentModelId={path} />
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </section>
+      <section className="site-section py-sm">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h2 className="mb-4">
+                <FormattedMessage
+                  id="common.latestPostSectionTitle"
+                  defaultMessage="Latest Posts"
+                />
+              </h2>
+            </div>
+          </div>
+          <div className="row blog-entries">
+            <div className="col-md-12 col-lg-8 main-content">
+              <div className="row">
+                {
+                  posts?.items.map((post) =>
+                    <div className="col-md-6" key={post.craftercms.id}>
+                      <PostCard model={post} />
+                    </div>
+                  )
+                }
+              </div>
+              {
+                posts?.pageCount > 1 &&
+                <div className="row mt-5">
+                  <div className="col-md-12 text-center">
+                    <nav aria-label="Categories navigation" className="text-center">
+                      <Paginate
+                        pageCount={posts.pageCount}
+                        onPageChange={(index) => {
+                          setPaginationData(
+                            {
+                              ...paginationData,
+                              currentPage: (index)
+                            });
+                        }}
+                      />
+                    </nav>
+                  </div>
+                </div>
+              }
+            </div>
+            <div className="col-md-12 col-lg-4 sidebar">
+
+              <SidebarSearch />
+
+              <SidebarBios model={model} fieldId="bios_o" />
+
+              <RecentPostsAside />
+
+              <SidebarCategories />
+
+              <SidebarTags />
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </BaseLayout>
+  );
 }
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+export default Home;
+

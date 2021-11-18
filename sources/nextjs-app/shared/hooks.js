@@ -19,7 +19,7 @@ import { fetchQuery } from '../fetchQuery';
 import { useGlobalContext } from './context';
 import { useDropZone, useICE } from '@craftercms/ice/react';
 import { parse } from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { crafterConfig, createResource, preParseSearchResults } from './utils';
 import { createQuery, search } from '@craftercms/search';
 import { map } from 'rxjs/operators';
@@ -225,7 +225,7 @@ export function useDnD(props) {
 }
 
 export function useSearchQuery() {
-  const { search } = useLocation();
+  const search = useRouter().query;
   const [query, setQuery] = useState(() => parse(search).q ?? '');
   const [page, setPage] = useState(() => parse(search).p ?? 0);
   const onChange = useCallback((e) => setQuery(e.target.value), []);
