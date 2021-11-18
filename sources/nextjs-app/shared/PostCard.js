@@ -15,7 +15,6 @@
  */
 
 import React from 'react';
-import Link from 'next/link';
 import { useIntl } from 'react-intl';
 import { useICE } from '@craftercms/ice/react';
 import { useGlobalContext } from './context';
@@ -64,7 +63,7 @@ function PostCard(props) {
   switch (format) {
     case PORTRAIT:
       return (
-        <Link href={slug} className={`blog-entry ${classes?.root ?? ''}`} {...ice}>
+        <a href={slug} className={`blog-entry ${classes?.root ?? ''}`} {...ice}>
           <div className="img-container">
             <img src={mainImage_s} alt={mainImageAlt_s} />
           </div>
@@ -83,12 +82,12 @@ function PostCard(props) {
             </div>
             <h2>{headline_s}</h2>
           </div>
-        </Link>
+        </a>
       );
     case LANDSCAPE:
       return (
         <div className="post-entry-horizontal" {...ice}>
-          <Link href={slug} className={classes?.root}>
+          <a href={slug} className={classes?.root}>
             <div className="image" style={{ backgroundImage: `url(${mainImage_s})` }} />
             <span className="text">
               <div className="post-meta">
@@ -105,12 +104,12 @@ function PostCard(props) {
               </div>
               <h2>{headline_s}</h2>
             </span>
-          </Link>
+          </a>
         </div>
       );
     case LANDSCAPE_COMPRESSED:
       return (
-        <Link href={slug} className={classes?.root} {...ice}>
+        <a href={slug} className={classes?.root} {...ice}>
           <img src={mainImage_s} alt={mainImageAlt_s} className="mr-4" />
           <div className="text">
             <h4>{headline_s}</h4>
@@ -118,11 +117,11 @@ function PostCard(props) {
               <span className="mr-2">{formatDate(dateModified)}</span>
             </div>
           </div>
-        </Link>
+        </a>
       );
     case IMAGE_BACKGROUND:
       return (
-        <Link
+        <a
           href={slug}
           className={`a-block d-flex align-items-center ${classes?.root ?? ''}`}
           style={{ backgroundImage: `url(${mainImage_s})` }}
@@ -153,14 +152,14 @@ function PostCard(props) {
               showBlurb && <p>{blurb_t}</p>
             }
           </div>
-        </Link>
+        </a>
       );
     default:
       console.error(`Unknown PostCard format "${format}" on post "${headline_s}"`);
       return (
-        <Link href={slug} className={classes?.root} {...ice}>
+        <a href={slug} className={classes?.root} {...ice}>
           <h2>{headline_s}</h2>
-        </Link>
+        </a>
       );
   }
 }

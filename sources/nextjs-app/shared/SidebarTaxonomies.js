@@ -18,7 +18,6 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import { usePencil, useTaxonomiesResource } from "./hooks";
 import { createTaxonomyFilter } from "./utils";
-import CircularProgressSpinner from "./CircularProgressSpinner";
 import { parseDescriptor } from "@craftercms/content";
 
 function SidebarListContent(props) {
@@ -29,10 +28,11 @@ function SidebarListContent(props) {
 		listClass,
 		resource
 	} = props;
-	const { data } = resource.read();
+	const { data } = resource;
 	const taxonomies = parseDescriptor(data.taxonomy.items);
 	const filteredTaxonomies = taxonomies.filter(filter)[0];
 	const ice = usePencil({ model: filteredTaxonomies });
+
 	return (
     Array.isArray(filteredTaxonomies?.items?.item) && filteredTaxonomies.items.item.length > 0 &&
 		<div className="sidebar-box">
@@ -51,16 +51,15 @@ function SidebarListContent(props) {
 }
 
 export function SidebarTaxonomies(props) {
-	let resource = useTaxonomiesResource();
 	return (
 		<SidebarListContent
 			{...props}
-			resource={resource}
+			resource={props.taxonomiesResource}
 		/>
 	);
 }
 
-export function SidebarTags() {
+export function SidebarTags(props) {
 	return (
 		<SidebarTaxonomies
 			title={<FormattedMessage
@@ -70,11 +69,12 @@ export function SidebarTags() {
 			filter={createTaxonomyFilter("tags.xml")}
 			baseUrl='/tag'
 			listClass='tags'
+			taxonomiesResource={props.taxonomiesResource}
 		/>
 	);
 }
 
-export function SidebarCategories() {
+export function SidebarCategories(props) {
 	return (
 		<SidebarTaxonomies
 			title={<FormattedMessage
@@ -84,6 +84,7 @@ export function SidebarCategories() {
 			filter={createTaxonomyFilter("categories.xml")}
 			baseUrl='/category'
 			listClass='categories'
+			taxonomiesResource={props.taxonomiesResource}
 		/>
 	);
 }

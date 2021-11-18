@@ -1,0 +1,208 @@
+/*
+ * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+import React, { useState } from 'react';
+import { parseDescriptor } from '@craftercms/content';
+import BaseLayout from '../shared/BaseLayout';
+import { WrappedContentType } from '../shared/ContentType';
+import PostCard, { LANDSCAPE } from '../shared/PostCard';
+import { FormattedMessage } from 'react-intl';
+import RecentPostsAside from '../shared/RecentPostsAside';
+import DropZone from '../shared/DropZone';
+import SidebarBios from '../shared/SidebarBios';
+import SidebarSearch from '../shared/SidebarSearch';
+import { SidebarCategories, SidebarTags } from '../shared/SidebarTaxonomies';
+import { usePosts } from '../shared/hooks';
+import Paginate from '../shared/Paginate';
+
+import byUrlQuery from '../shared/queries.graphql';
+import { fetchQuery } from '../fetchQuery';
+
+function About(props) {
+  const {
+    model,
+    model: {
+      headline_s,
+      content_o
+    },
+    meta: {
+      siteTitle,
+      socialLinks
+    },
+    taxonomiesResource
+  } = props;
+
+  const [paginationData, setPaginationData] = useState({
+    itemsPerPage: 10,
+    currentPage: 0
+  });
+
+  const posts = usePosts(paginationData);
+
+  const modelPath = model.craftercms.path;
+  return (
+    <BaseLayout siteTitle={siteTitle} socialLinks={socialLinks}>
+      <section className="site-section pt-5">
+        <div className="container">
+          <div className="row blog-entries">
+            <div className="col-md-12 col-lg-8 main-content">
+
+              <div className="row">
+                <div className="col-md-12">
+                  <h2 className="mb-4">{headline_s}</h2>
+                  <DropZone component="div" model={model} fieldId="content_o">
+                    {
+                      content_o?.map(component =>
+                        <WrappedContentType
+                          model={component}
+                          parentModelId={modelPath}
+                          key={component.craftercms.id}
+                          wrapper={{
+                            component: 'div',
+                            className: 'mb-5'
+                          }}
+                        />
+                      )
+                    }
+                  </DropZone>
+                </div>
+              </div>
+
+              <div className="row mb-5 mt-5">
+                <div className="col-md-12 mb-5">
+                  <h2>
+                    <FormattedMessage
+                      id="common.latestPostSectionTitle"
+                      defaultMessage="Latest Posts"
+                    />
+                  </h2>
+                </div>
+                <div className="col-md-12">
+                  {
+                    posts?.items.map((post) =>
+                      <PostCard model={post} format={LANDSCAPE} key={post.craftercms.id} />
+                    )
+                  }
+                </div>
+              </div>
+
+              {
+                posts?.pageCount > 1 &&
+                <nav aria-label="Posts navigation" className="text-center">
+                  <Paginate
+                    pageCount={posts.pageCount}
+                    onPageChange={(index) => setPaginationData(
+                      {
+                        ...paginationData,
+                        currentPage: index * paginationData.itemsPerPage
+                      })
+                    }
+                  />
+                </nav>
+              }
+            </div>
+            <div className="col-md-12 col-lg-4 sidebar">
+
+              <SidebarSearch />
+
+              <SidebarBios model={model} fieldId="bios_o" />
+
+              <RecentPostsAside />
+
+              <SidebarCategories taxonomiesResource={taxonomiesResource} />
+
+              <SidebarTags taxonomiesResource={taxonomiesResource} />
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </BaseLayout>
+  );
+}
+
+export async function getServerSideProps() {
+  const url = '/about';
+  const limit = 8;
+  const page = 0;
+  const pagination = { limit, offset: page ? (page * limit) : 0 };
+  const res = await fetchQuery(
+    { text: byUrlQuery },
+    {
+      url: `.*${url === '/' ? 'website/index' : url}.*`,
+      includePosts: true,
+      postsLimit: pagination.limit,
+      postsOffset: pagination.offset
+    }
+  );
+
+  const data = res.data;
+  const model = parseDescriptor(data.content.items?.[0]);
+  const levelDescriptor = data.levelDescriptors.items
+    .filter(levelDescriptor => levelDescriptor.file__name === 'crafter-level-descriptor.level.xml')
+    .map(levelDescriptor => levelDescriptor)[0];
+
+  const taxonomiesResource = await useTaxonomiesResource();
+
+  return { props:
+    {
+      model,
+      meta: {
+        siteTitle: levelDescriptor.siteTitle_s,
+        socialLinks: levelDescriptor.socialLinks_o.item,
+        disqus: {
+          websiteShortname: levelDescriptor.websiteShortname_s
+        },
+        posts: {
+          total: data.posts.total,
+          ...pagination
+        }
+      },
+      taxonomiesResource,
+    }
+  };
+}
+
+async function useTaxonomiesResource() {
+  const res = await fetchQuery({
+    text: `
+    query Taxonomies {
+      taxonomy {
+        total
+        items {
+          guid: objectId
+          path: localId
+          contentTypeId: content__type
+          dateCreated: createdDate_dt
+          dateModified: lastModifiedDate_dt
+          label: internal__name
+          items {
+            item {
+              key
+              value
+              image_s
+            }
+          }
+        }
+      }
+    }
+  `
+  });
+
+  return res;
+}
+
+export default About;

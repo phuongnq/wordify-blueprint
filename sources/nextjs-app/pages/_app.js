@@ -1,10 +1,13 @@
 import { GlobalContextProvider } from '../shared/context';
+import AppIntl from '../shared/AppIntl';
 import '../styles/globals.css'
 
 function App({ Component, pageProps }) {
   return (
     <GlobalContextProvider>
-      <Component {...pageProps} />
+      <AppIntl>
+        <Component {...pageProps} />
+      </AppIntl>
     </GlobalContextProvider>
   );
 }

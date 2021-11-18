@@ -13,21 +13,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import dynamic from 'next/dynamic'
 
 const map = {
-  '/page/entry': import('../pages/Home'),
-  '/page/about': import('../pages/About'),
-  '/page/contact': import('../pages/Contact'),
-  '/page/category': import('../pages/Category'),
-  '/page/search': import('../pages/Search'),
-  '/component/header': import('../components/Header'),
-  '/component/footer': import('../components/Footer'),
-  '/component/bio': import('../components/Bio'),
-  '/component/image': import('../components/Image'),
-  '/component/responsive_columns': import('../components/ResponsiveColumns'),
-  '/component/rich_text': import('../components/RichText'),
-  '/component/slider': import('../components/Slider'),
-  '/component/post': import('../pages/Post')
+  '/page/entry': dynamic(() => import('../pages/Home')),
+  '/page/about': dynamic(() => import('../pages/about')),
+  '/page/contact': dynamic(() => import('../pages/Contact')),
+  '/page/category': dynamic(() => import('../pages/Category')),
+  '/page/search': dynamic(() => import('../pages/Search')),
+  '/component/header': dynamic(() => import('../components/Header')),
+  '/component/footer': dynamic(() => import('../components/Footer')),
+  '/component/bio': dynamic(() => import('../components/Bio')),
+  '/component/image': dynamic(() => import('../components/Image')),
+  '/component/responsive_columns': dynamic(() => import('../components/ResponsiveColumns')),
+  '/component/rich_text': dynamic(() => import('../components/RichText')),
+  '/component/slider': dynamic(() => import('../components/Slider')),
+  '/component/post': dynamic(() => import('../pages/Post'))
 };
 
 export default map;

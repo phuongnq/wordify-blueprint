@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import NotFound, { NotDeveloped } from '../pages/NotFound';
+import NotFound, { NotDeveloped } from '../pages/404';
 import contentTypeMap from './contentTypeMap';
 import React from 'react';
 import { usePencil } from './hooks';
@@ -25,7 +25,7 @@ function ContentTypeWithPencil(props) {
 }
 
 export function ContentType(props) {
-  const { model } = props;
+  const model = props.model
   const Component = (model === null) ? NotFound : (contentTypeMap[model.craftercms.contentTypeId] || NotDeveloped);
   return <Component {...props} />;
 }
