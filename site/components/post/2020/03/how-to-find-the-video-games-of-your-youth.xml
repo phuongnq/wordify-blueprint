@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component>
-  <content-type>/component/post</content-type>
-  <display-template />
-  <no-template-required>true</no-template-required>
-  <merge-strategy>inherit-levels</merge-strategy>
-  <objectGroupId>ab5b</objectGroupId>
-  <objectId>ab5bf552-aeae-1bb9-44c7-313b99e1aa70</objectId>
-  <file-name>how-to-find-the-video-games-of-your-youth.xml</file-name>
-  <internal-name>Video Games of Your Youth</internal-name>
-  <pageTitle_s>How to Find the Video Games of Your Youth</pageTitle_s>
-  <pageDescription_s />
-  <headline_s tokenized="true">How to Find the Video Games of Your Youth</headline_s>
-  <orderDefault_f>-1</orderDefault_f>
-  <content_o item-list="true">
-    <item datasource="richTextSections" inline="true">
-      <key>8735718d-8633-375f-9271-07840f2bae1c</key>
-      <value>Text Piece One</value>
-      <component id="8735718d-8633-375f-9271-07840f2bae1c">
+	<content-type>/component/post</content-type>
+	<display-template/>
+	<no-template-required>true</no-template-required>
+	<merge-strategy>inherit-levels</merge-strategy>
+	<objectGroupId>ab5b</objectGroupId>
+	<objectId>ab5bf552-aeae-1bb9-44c7-313b99e1aa70</objectId>
+	<file-name>how-to-find-the-video-games-of-your-youth.xml</file-name>
+	<internal-name>Video Games of Your Youth Update</internal-name>
+	<pageTitle_s>How to Find the Video Games of Your Youth</pageTitle_s>
+	<pageDescription_s/>
+	<headline_s tokenized="true">How to Find the Video Games of Your Youth</headline_s>
+	<orderDefault_f>-1</orderDefault_f>
+	<content_o item-list="true">	<item datasource="richTextSections" inline="true">	<key>8735718d-8633-375f-9271-07840f2bae1c</key>
+	<value>Text Piece One</value>
+<component id="8735718d-8633-375f-9271-07840f2bae1c">
         <content-type>/component/rich_text</content-type>
         <display-template>/templates/web/components/rich_text.ftl</display-template>
-        <no-template-required />
+        <no-template-required/>
         <merge-strategy>inherit-levels</merge-strategy>
         <objectGroupId>8735</objectGroupId>
         <objectId>8735718d-8633-375f-9271-07840f2bae1c</objectId>
@@ -34,14 +32,12 @@
         <lastModifiedDate>2020-11-02T18:02:18.321Z</lastModifiedDate>
         <lastModifiedDate_dt>2020-11-02T18:02:18.321Z</lastModifiedDate_dt>
       </component>
-    </item>
-    <item datasource="responsiveColumns" inline="true">
-      <key>e04f588d-21e0-e79c-f9e9-b18c7cc89ced</key>
-      <value>Rich Text Two</value>
-      <component id="e04f588d-21e0-e79c-f9e9-b18c7cc89ced">
+	</item>	<item datasource="responsiveColumns" inline="true">	<key>e04f588d-21e0-e79c-f9e9-b18c7cc89ced</key>
+	<value>Rich Text Two</value>
+<component id="e04f588d-21e0-e79c-f9e9-b18c7cc89ced">
         <content-type>/component/responsive_columns</content-type>
         <display-template>/templates/web/components/responsive_columns.ftl</display-template>
-        <no-template-required />
+        <no-template-required/>
         <merge-strategy>inherit-levels</merge-strategy>
         <objectGroupId>e04f</objectGroupId>
         <objectId>e04f588d-21e0-e79c-f9e9-b18c7cc89ced</objectId>
@@ -54,7 +50,7 @@
                 <component id="89124152-5346-9ee7-3b92-72a876ca26a4">
                   <content-type>/component/rich_text</content-type>
                   <display-template>/templates/web/components/rich_text.ftl</display-template>
-                  <no-template-required />
+                  <no-template-required/>
                   <merge-strategy>inherit-levels</merge-strategy>
                   <objectGroupId>8912</objectGroupId>
                   <objectId>89124152-5346-9ee7-3b92-72a876ca26a4</objectId>
@@ -83,7 +79,7 @@
                 <component id="1e54824a-741d-5b6c-9589-fb97c2322ea1">
                   <content-type>/component/rich_text</content-type>
                   <display-template>/templates/web/components/rich_text.ftl</display-template>
-                  <no-template-required />
+                  <no-template-required/>
                   <merge-strategy>inherit-levels</merge-strategy>
                   <objectGroupId>1e54</objectGroupId>
                   <objectId>1e54824a-741d-5b6c-9589-fb97c2322ea1</objectId>
@@ -110,41 +106,27 @@
         <lastModifiedDate>2020-11-02T18:02:40.562Z</lastModifiedDate>
         <lastModifiedDate_dt>2020-11-02T18:02:40.562Z</lastModifiedDate_dt>
       </component>
-    </item>
-  </content_o>
-  <authorBio_o item-list="true">
-    <item datasource="bios">
-      <key>/site/components/bio/f4b2297e-af30-a288-6b54-1e838a0eadf5.xml</key>
-      <value>John Doe's Bio</value>
-      <include>/site/components/bio/f4b2297e-af30-a288-6b54-1e838a0eadf5.xml</include>
-      <disableFlattening>false</disableFlattening>
-    </item>
-  </authorBio_o>
-  <categories_o>
-    <item>
-      <key>lifestyle</key>
-      <value_smv>Lifestyle</value_smv>
-    </item>
-    <item>
-      <key>adventure</key>
-      <value_smv>Adventure</value_smv>
-    </item>
-  </categories_o>
-  <tags_o>
-    <item>
-      <key>lifestyle</key>
-      <value_smv>Lifestyle</value_smv>
-    </item>
-    <item>
-      <key>adventure</key>
-      <value_smv>Adventure</value_smv>
-    </item>
-  </tags_o>
-  <mainImage_s>/static-assets/images/img_1.jpg</mainImage_s>
-  <blurb_t />
-  <createdDate>2020-11-02T18:01:36.409Z</createdDate>
-  <createdDate_dt>2020-11-02T18:01:36.409Z</createdDate_dt>
-  <lastModifiedDate>2020-11-16T21:57:40.634Z</lastModifiedDate>
-  <lastModifiedDate_dt>2020-11-16T21:57:40.634Z</lastModifiedDate_dt>
-  <folder-name />
+	</item></content_o>
+	<authorBio_o item-list="true">	<item datasource="bios">	<key>/site/components/bio/f4b2297e-af30-a288-6b54-1e838a0eadf5.xml</key>
+	<value>John Doe's Bio</value>
+	<include>/site/components/bio/f4b2297e-af30-a288-6b54-1e838a0eadf5.xml</include>
+	<disableFlattening>false</disableFlattening>
+	</item></authorBio_o>
+	<categories_o>	<item>	<key>lifestyle</key>
+	<value_smv>Lifestyle</value_smv>
+	</item>	<item>	<key>adventure</key>
+	<value_smv>Adventure</value_smv>
+	</item></categories_o>
+	<tags_o>	<item>	<key>lifestyle</key>
+	<value_smv>Lifestyle</value_smv>
+	</item>	<item>	<key>adventure</key>
+	<value_smv>Adventure</value_smv>
+	</item></tags_o>
+	<mainImage_s>/static-assets/images/img_1.jpg</mainImage_s>
+	<blurb_t/>
+	<createdDate>2020-11-02T18:01:36.409Z</createdDate>
+	<createdDate_dt>2020-11-02T18:01:36.409Z</createdDate_dt>
+	<lastModifiedDate>2021-11-18T10:21:29.116Z</lastModifiedDate>
+	<lastModifiedDate_dt>2021-11-18T10:21:29.116Z</lastModifiedDate_dt>
+	<folder-name/>
 </component>
