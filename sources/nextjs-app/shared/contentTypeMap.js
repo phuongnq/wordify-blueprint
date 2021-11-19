@@ -28,7 +28,7 @@ const map = {
   '/component/responsive_columns': dynamic(() => import('../components/ResponsiveColumns')),
   '/component/rich_text': dynamic(() => import('../components/RichText')),
   '/component/slider': dynamic(() => import('../components/Slider')),
-  '/component/post': dynamic(() => import('../pages/Post'))
+  '/component/post': dynamic(() => import('../pages/post/[[...slug]]'))
 };
 
 export default map;
