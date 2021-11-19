@@ -74,7 +74,7 @@ export default function Footer({ socialLinks }) {
         <div className="row">
           {
             footer &&
-            <div className="col-md-12 text-center" dangerouslySetInnerHTML={{ __html: footer.copyright_html_raw }}/>
+            <div className="col-md-12 text-center" dangerouslySetInnerHTML={{ __html: footer.copyright_html_raw }} />
           }
         </div>
       </div>

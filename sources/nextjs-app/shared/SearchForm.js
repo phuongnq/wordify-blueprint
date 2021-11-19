@@ -22,7 +22,8 @@ let count = 0;
 
 function SearchForm(props) {
   const router = useRouter();
-  const { placeholder = '', id = `searchInput_${count++}` } = props;
+  const { placeholder = '', id = `searchInput_0` } = props;
+
   const classes = Object.assign({
     form: '',
     input: '',

@@ -98,7 +98,6 @@ export default function Header({ siteTitle, socialLinks }) {
                     <NavLink
                       exact
                       className="nav-link"
-                      activeClassName="active"
                       href={page.url}
                     >
                       {page.navLabel}
