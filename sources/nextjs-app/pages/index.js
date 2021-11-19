@@ -26,6 +26,8 @@ import { SidebarCategories, SidebarTags } from '../shared/SidebarTaxonomies';
 import { usePosts } from '../shared/hooks';
 import Paginate from '../shared/Paginate';
 
+import { getProps, useTaxonomiesResource } from '../shared/ssr';
+
 function Home(props) {
   const {
     model,
@@ -38,7 +40,8 @@ function Home(props) {
     meta: {
       siteTitle,
       socialLinks
-    }
+    },
+    taxonomiesResource
   } = props;
   const [paginationData, setPaginationData] = useState({
     itemsPerPage: 8,
@@ -53,8 +56,10 @@ function Home(props) {
           <div className="row">
             {
               slider_o?.map((slider, index) =>
-                <div className="col-md-12" key={index}>
-                  <Slider model={slider} parentModelId={path} />
+                <div suppressHydrationWarning={true} className="col-md-12" key={index}>
+                  {process.browser && (
+                    <Slider model={slider} parentModelId={path} />
+                  )}
                 </div>
               )
             }
@@ -112,9 +117,9 @@ function Home(props) {
 
               <RecentPostsAside />
 
-              <SidebarCategories />
+              <SidebarCategories taxonomiesResource={taxonomiesResource} />
 
-              <SidebarTags />
+              <SidebarTags taxonomiesResource={taxonomiesResource} />
 
             </div>
           </div>
@@ -122,6 +127,18 @@ function Home(props) {
       </section>
     </BaseLayout>
   );
+}
+
+export async function getServerSideProps() {
+  const url = '/';
+  const limit = 8;
+  const page = 0;
+
+  const props = await getProps(url, limit, page);
+  const taxonomiesResource = await useTaxonomiesResource();
+  props.taxonomiesResource = taxonomiesResource;
+
+  return { props };
 }
 
 export default Home;

@@ -18,7 +18,7 @@ import dynamic from 'next/dynamic'
 const map = {
   '/page/entry': dynamic(() => import('../pages/Home')),
   '/page/about': dynamic(() => import('../pages/about')),
-  '/page/contact': dynamic(() => import('../pages/Contact')),
+  '/page/contact': dynamic(() => import('../pages/contact')),
   '/page/category': dynamic(() => import('../pages/Category')),
   '/page/search': dynamic(() => import('../pages/Search')),
   '/component/header': dynamic(() => import('../components/Header')),

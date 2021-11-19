@@ -15,7 +15,6 @@
  */
 
 import React, { useState } from 'react';
-import { parseDescriptor } from '@craftercms/content';
 import BaseLayout from '../shared/BaseLayout';
 import { WrappedContentType } from '../shared/ContentType';
 import PostCard, { LANDSCAPE } from '../shared/PostCard';
@@ -28,8 +27,7 @@ import { SidebarCategories, SidebarTags } from '../shared/SidebarTaxonomies';
 import { usePosts } from '../shared/hooks';
 import Paginate from '../shared/Paginate';
 
-import byUrlQuery from '../shared/queries.graphql';
-import { fetchQuery } from '../fetchQuery';
+import { getProps, useTaxonomiesResource } from '../shared/ssr';
 
 function About(props) {
   const {
@@ -138,71 +136,12 @@ export async function getServerSideProps() {
   const url = '/about';
   const limit = 8;
   const page = 0;
-  const pagination = { limit, offset: page ? (page * limit) : 0 };
-  const res = await fetchQuery(
-    { text: byUrlQuery },
-    {
-      url: `.*${url === '/' ? 'website/index' : url}.*`,
-      includePosts: true,
-      postsLimit: pagination.limit,
-      postsOffset: pagination.offset
-    }
-  );
 
-  const data = res.data;
-  const model = parseDescriptor(data.content.items?.[0]);
-  const levelDescriptor = data.levelDescriptors.items
-    .filter(levelDescriptor => levelDescriptor.file__name === 'crafter-level-descriptor.level.xml')
-    .map(levelDescriptor => levelDescriptor)[0];
-
+  const props = await getProps(url, limit, page);
   const taxonomiesResource = await useTaxonomiesResource();
+  props.taxonomiesResource = taxonomiesResource;
 
-  return { props:
-    {
-      model,
-      meta: {
-        siteTitle: levelDescriptor.siteTitle_s,
-        socialLinks: levelDescriptor.socialLinks_o.item,
-        disqus: {
-          websiteShortname: levelDescriptor.websiteShortname_s
-        },
-        posts: {
-          total: data.posts.total,
-          ...pagination
-        }
-      },
-      taxonomiesResource,
-    }
-  };
-}
-
-async function useTaxonomiesResource() {
-  const res = await fetchQuery({
-    text: `
-    query Taxonomies {
-      taxonomy {
-        total
-        items {
-          guid: objectId
-          path: localId
-          contentTypeId: content__type
-          dateCreated: createdDate_dt
-          dateModified: lastModifiedDate_dt
-          label: internal__name
-          items {
-            item {
-              key
-              value
-              image_s
-            }
-          }
-        }
-      }
-    }
-  `
-  });
-
-  return res;
+  return { props };
 }
 
 export default About;

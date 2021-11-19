@@ -9,6 +9,10 @@ module.exports = {
       {
         source: '/api/1/site/graphql:path*',
         destination: 'http://localhost:8080/api/1/site/graphql:path*',
+      },
+      {
+        source: '/api/1/site/content_store/:path*',
+        destination: 'http://localhost:8080/api/1/site/content_store/:path*'
       }
     ]
   },

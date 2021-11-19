@@ -48,6 +48,7 @@ export default function Home(props) {
 
   return (
     <BaseLayout siteTitle={siteTitle} socialLinks={socialLinks}>
+      <h1>this is a test</h1>
       <section className="site-section pt-5 pb-5">
         <div className="container">
           <div className="row">

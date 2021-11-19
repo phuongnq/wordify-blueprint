@@ -16,7 +16,7 @@
 
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { usePencil, useTaxonomiesResource } from "./hooks";
+import { usePencil } from "./hooks";
 import { createTaxonomyFilter } from "./utils";
 import { parseDescriptor } from "@craftercms/content";
 
