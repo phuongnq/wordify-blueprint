@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { createContext, useContext, useMemo } from 'react';
-import { isAuthoring } from './utils';
+import React, { createContext, useContext, useEffect, useMemo } from 'react';
+import { fetchIsAuthoring } from '@craftercms/ice';
 import { useSpreadState } from './hooks';
 
 export const GlobalContext = createContext();
@@ -30,7 +30,7 @@ function useGlobalContext() {
 
 function GlobalContextProvider(props) {
   const [state, setState] = useSpreadState({
-    isAuthoring: isAuthoring(),
+    isAuthoring: false,
     locale: 'en',
     pages: null,
     pagesLoading: false,
@@ -38,6 +38,14 @@ function GlobalContextProvider(props) {
     $: props.jQuery
   });
   const value = useMemo(() => [state, setState], [state, setState]);
+  useEffect(() => {
+    fetchIsAuthoring().then((isAuthoring) => {
+      if (isAuthoring) {
+        state.isAuthoring = true;
+        setState(state);
+      }
+    });
+  }, []);
   return <GlobalContext.Provider value={value} {...props} />;
 }
 
