@@ -58,6 +58,7 @@
          <url>http://localhost:3000</url>
          <patterns>
             <pattern>.*</pattern>
+            <pattern>/_next/static/chunks/pages/category/[[...slug]].js</pattern>
          </patterns>
       </server>
    </servers>
