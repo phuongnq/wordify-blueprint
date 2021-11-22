@@ -15,8 +15,9 @@
  */
 
 import React from 'react';
+import Image from 'next/image';
 
-function Image(props) {
+function ImageComponent(props) {
   const {
     ice,
     model: { image_s, alternativeText_s }
@@ -28,4 +29,4 @@ function Image(props) {
   );
 }
 
-export default Image;
+export default ImageComponent;

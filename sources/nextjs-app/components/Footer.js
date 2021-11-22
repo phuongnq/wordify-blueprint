@@ -16,6 +16,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useFooter, usePencil } from '../shared/hooks';
 
 export default function Footer({ socialLinks }) {

@@ -39,6 +39,7 @@ function Slider(props) {
   }
 
   const [{ $ }] = useGlobalContext();
+
   const ice = usePencil(props);
 
   // region "Sample"

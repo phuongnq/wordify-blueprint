@@ -28,7 +28,7 @@ import CategoryCard from '../../shared/CategoryCard';
 import { createTaxonomyFilter } from '../../shared/utils';
 import Paginate from '../../shared/Paginate';
 
-import { getProps, useTaxonomiesResource } from '../../shared/ssr';
+import { getProps, getTaxonomiesResource } from '../../shared/ssr';
 
 function CategoryContent({ resource, isTag, categoryId }) {
   const { data } = resource;
@@ -168,7 +168,7 @@ export async function getServerSideProps(context) {
 
   const props = await getProps(url, limit, page);
   props.match = { path, params };
-  const taxonomiesResource = await useTaxonomiesResource();
+  const taxonomiesResource = await getTaxonomiesResource();
   props.taxonomiesResource = taxonomiesResource;
 
   return { props };

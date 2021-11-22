@@ -15,7 +15,6 @@ class MyDocument extends Document {
             name="description"
             content="Web site created with Crafter CMS and Wordify template"
           />
-          <link rel="apple-touch-icon" href={`${PUBLIC_URL}/logo192.png`} />
           {/* <!--
             manifest.json provides metadata used when your web app is installed on a
             user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -31,74 +30,7 @@ class MyDocument extends Document {
             Learn how to configure a non-root public URL by running `npm run build`.
           --> */}
 
-          <style jsx>{`
-            body {
-              font-family: sans-serif;
-            }
-            .circular-progress-spinner {
-              display: flex;
-              text-align: center;
-              flex-direction: column;
-              place-content: center;
-            }
-            .circular-progress-spinner__screen-height {
-              height: 100vh;
-            }
-            .circular-progress-spinner--graphic-container {
-
-            }
-            .circular-progress-spinner--graphic {
-              animation: rotate 2s linear infinite;
-              height: 100px;
-              position: relative;
-              width: 100px;
-            }
-            .circular-progress-spinner--path {
-              stroke-dasharray: 1, 200;
-              stroke-dashoffset: 0;
-              animation: dash 1.5s ease-in-out infinite, color 6s ease-in-out infinite;
-              stroke-linecap: round;
-            }
-            .circular-progress-spinner--message {
-              text-align: center;
-            }
-            @keyframes rotate {
-              100% {
-                transform: rotate(360deg);
-              }
-            }
-            @keyframes dash {
-              0% {
-                stroke-dasharray: 1, 200;
-                stroke-dashoffset: 0;
-              }
-              50% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -35;
-              }
-              100% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -124;
-              }
-            }
-            @keyframes color {
-              100%, 0% {
-                stroke: #d62d20;
-              }
-              40% {
-                stroke: #0057e7;
-              }
-              66% {
-                stroke: #008744;
-              }
-              80%, 90% {
-                stroke: #ffa700;
-              }
-            }
-          `}
-          </style>
-
-          <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700|Inconsolata:400,700" rel="stylesheet" />
+          <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,700|Inconsolata:400,700&display=optional" rel="stylesheet" />
 
           <link rel="stylesheet" href="/static-assets/css/bootstrap.css" />
           <link rel="stylesheet" href="/static-assets/css/animate.css" />
@@ -114,8 +46,6 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <script src="/static-assets/js/jquery-3.2.1.min.js"></script>
-          <script src="/static-assets/js/owl.carousel.min.js"></script>
         </body>
       </Html>
     )

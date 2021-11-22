@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import Image from 'next/image';
 
 export default function Bio(props) {
   const {
@@ -41,7 +42,7 @@ export default function Bio(props) {
   return (
     <>
       <div className="bio text-center" {...ice}>
-        <img src={profilePic_s} alt="" className="img-fluid" />
+        <img src={profilePic_s} alt="" className="img-fluid" layout='fill' />
         <div className="bio-body">
           <h2>{name_s}</h2>
           <p>{bio_t}</p>

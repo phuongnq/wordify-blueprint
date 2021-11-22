@@ -40,7 +40,7 @@ export async function getProps(url, limit, page) {
   };
 }
 
-export async function useTaxonomiesResource() {
+export async function getTaxonomiesResource() {
   const res = await fetchQuery({
     text: `
     query Taxonomies {
@@ -71,6 +71,9 @@ export async function useTaxonomiesResource() {
 
 const contentTypes = ['/component/post'];
 export async function useUrlSearchQueryFetchResource(query, page, size = 1) {
+  if (!process.browser) {
+    return;
+  }
   const fields = ['headline_t^1.5', 'content_o.item.component.content_html^1'];
     let searchQuery = {};
     let userTerm = query;
@@ -152,6 +155,5 @@ export async function useUrlSearchQueryFetchResource(query, page, size = 1) {
       method: 'POST'
     });
     const data = await res.json();
-    console.log(data);
     return data;
 }

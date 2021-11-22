@@ -175,7 +175,7 @@ export function usePosts(paginationData, categories, tags, exclude) {
   return posts;
 }
 
-export function useTaxonomiesResource() {
+export function getTaxonomiesResource() {
   const [resource, setResource] = useState(neverResource);
 
   useEffect(() => {

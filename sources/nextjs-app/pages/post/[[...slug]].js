@@ -15,6 +15,7 @@
  */
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import BaseLayout from '../../shared/BaseLayout';
 import ContentType from '../../shared/ContentType';
 import RecentPostsAside from '../../shared/RecentPostsAside';
@@ -28,7 +29,7 @@ import { useIntl } from 'react-intl';
 import Paginate from '../../shared/Paginate';
 import { usePosts } from '../../shared/hooks';
 
-import { getProps, useTaxonomiesResource } from '../../shared/ssr';
+import { getProps, getTaxonomiesResource } from '../../shared/ssr';
 
 function Post(props) {
   const {
@@ -58,10 +59,10 @@ function Post(props) {
           <div className="row blog-entries element-animate-disabled">
 
             <div className="col-md-12 col-lg-8 main-content">
-              <img src={model.mainImage_s} alt="" className="img-fluid mb-5" />
+              <img src={model.mainImage_s} alt="" className="img-fluid mb-5" layout='fill'/>
               <div className="post-meta">
                 <span className="author mr-2">
-                  <img src={model.authorBio_o[0].profilePic_s} alt="" className="mr-2" /> {model.authorBio_o[0].name_s}
+                  <img src={model.authorBio_o[0].profilePic_s} alt="" className="mr-2" layout='fill'/> {model.authorBio_o[0].name_s}
                 </span>
                 {' • '}<span className="mr-2">{formatDate(model.craftercms.dateCreated)}</span>
                 {' • '}<span className="ml-2">
@@ -195,7 +196,7 @@ export async function getServerSideProps(context) {
   const page = 0;
 
   const props = await getProps(url, limit, page);
-  const taxonomiesResource = await useTaxonomiesResource();
+  const taxonomiesResource = await getTaxonomiesResource();
   props.taxonomiesResource = taxonomiesResource;
 
   return { props };

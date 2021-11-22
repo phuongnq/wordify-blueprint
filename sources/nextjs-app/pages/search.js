@@ -27,7 +27,7 @@ import { useRouter } from 'next/router'
 import Paginate from '../shared/Paginate';
 import SidebarBios from '../shared/SidebarBios';
 
-import { getProps, useTaxonomiesResource } from '../shared/ssr';
+import { getProps, getTaxonomiesResource } from '../shared/ssr';
 
 function SearchResults({ resource, paginationData, onPageChange }) {
   const res= resource.read();
@@ -76,9 +76,7 @@ function Search(props) {
   const [query] = useSearchQuery();
 
   let resource;
-  if (process.browser) {
-    resource = useUrlSearchQueryFetchResource(paginationData.itemsPerPage);
-  }
+  resource = useUrlSearchQueryFetchResource(paginationData.itemsPerPage);
 
   const onPageChange = (page) => {
     setPaginationData({ ...paginationData, currentPage: page});
@@ -106,7 +104,6 @@ function Search(props) {
                 {process.browser && (
                   <Suspense fallback={<CircularProgressSpinner screenHeight={false} />}>
                     <SearchResults
-                      resource={resource}
                       paginationData={paginationData}
                       onPageChange={onPageChange}
                       resource={resource}
@@ -141,7 +138,7 @@ export async function getServerSideProps(context) {
   const page = 0;
 
   const props = await getProps(url, limit, page);
-  const taxonomiesResource = await useTaxonomiesResource();
+  const taxonomiesResource = await getTaxonomiesResource();
   props.taxonomiesResource = taxonomiesResource;
 
   const searchQuery = context.query.q ?? '';

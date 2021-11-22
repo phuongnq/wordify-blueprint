@@ -26,7 +26,7 @@ import { SidebarCategories, SidebarTags } from '../shared/SidebarTaxonomies';
 import { usePosts } from '../shared/hooks';
 import Paginate from '../shared/Paginate';
 
-import { getProps, useTaxonomiesResource } from '../shared/ssr';
+import { getProps, getTaxonomiesResource } from '../shared/ssr';
 
 function Home(props) {
   const {
@@ -135,7 +135,7 @@ export async function getServerSideProps() {
   const page = 0;
 
   const props = await getProps(url, limit, page);
-  const taxonomiesResource = await useTaxonomiesResource();
+  const taxonomiesResource = await getTaxonomiesResource();
   props.taxonomiesResource = taxonomiesResource;
 
   return { props };
