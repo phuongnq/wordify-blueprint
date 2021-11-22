@@ -58,7 +58,6 @@
          <url>http://localhost:3000</url>
          <patterns>
             <pattern>.*</pattern>
-            <pattern>/_next/*</pattern>
          </patterns>
       </server>
    </servers>
