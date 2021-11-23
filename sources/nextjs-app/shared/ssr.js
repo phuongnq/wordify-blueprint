@@ -1,7 +1,20 @@
+/*
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published by
+ * the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 import { parseDescriptor } from '@craftercms/content';
-import { createQuery, search } from '@craftercms/search';
-import { map } from 'rxjs/operators';
-import { crafterConfig, createResource, preParseSearchResults } from './utils';
 
 import { fetchQuery } from '../fetchQuery';
 import byUrlQuery from '../shared/queries.graphql';
@@ -38,7 +51,7 @@ export async function getProps(url, limit, page) {
       }
     },
   };
-}
+};
 
 export async function getTaxonomiesResource() {
   const res = await fetchQuery({
@@ -67,93 +80,4 @@ export async function getTaxonomiesResource() {
   });
 
   return res;
-}
-
-const contentTypes = ['/component/post'];
-export async function useUrlSearchQueryFetchResource(query, page, size = 1) {
-  if (!process.browser) {
-    return;
-  }
-  const fields = ['headline_t^1.5', 'content_o.item.component.content_html^1'];
-    let searchQuery = {};
-    let userTerm = query;
-    searchQuery.filter = [
-      {
-        'terms': {
-          'content-type': contentTypes.map(id => id)
-        }
-      }
-    ];
-
-    if (userTerm) {
-      // Check if the user is requesting an exact match with quotes
-      const regex = /.*("([^"]+)").*/;
-      const matcher = userTerm.match(regex);
-      if (matcher) {
-        // Using must excludes any doc that doesn't match with the input from the user
-        searchQuery.must = [
-          {
-            'multi_match': {
-              'query': matcher[2],
-              'fields': fields,
-              'fuzzy_transpositions': false,
-              'auto_generate_synonyms_phrase_query': false
-            }
-          }
-        ];
-
-        // Remove the exact match to continue processing the user input
-        userTerm = userTerm.replace(matcher[1], '');
-      } else {
-        // Exclude docs that do not have any optional matches
-        searchQuery.minimum_should_match = 1;
-      }
-
-      if (userTerm) {
-        // Using should makes it optional and each additional match will increase the score of the doc
-        searchQuery.should = [
-          {
-            'multi_match': {
-              'query': userTerm,
-              'fields': fields,
-              'type': 'phrase_prefix',
-              'boost': 1.5
-            }
-          },
-          {
-            'multi_match': {
-              'query': userTerm,
-              'fields': fields
-            }
-          },
-          {
-            'match': {
-              'pageDescription_s': userTerm
-            }
-          },
-          {
-            'match': {
-              'categories_o.item.value_smv': userTerm
-            }
-          }
-        ]
-      }
-    }
-
-    const url = `${crafterConfig.baseUrl}/api/1/site/elasticsearch/search?crafterSite=${crafterConfig.site}`;
-    const body = {
-      query: {
-        'bool': searchQuery
-      }
-    };
-
-    const res = await fetch(url, {
-      headers: {
-        'content-type': 'application/json',
-      },
-      body,
-      method: 'POST'
-    });
-    const data = await res.json();
-    return data;
-}
+};

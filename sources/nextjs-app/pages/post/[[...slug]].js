@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -59,10 +59,10 @@ function Post(props) {
           <div className="row blog-entries element-animate-disabled">
 
             <div className="col-md-12 col-lg-8 main-content">
-              <img src={model.mainImage_s} alt="" className="img-fluid mb-5" layout='fill'/>
+              <img src={model.mainImage_s} alt="" className="img-fluid mb-5" />
               <div className="post-meta">
                 <span className="author mr-2">
-                  <img src={model.authorBio_o[0].profilePic_s} alt="" className="mr-2" layout='fill'/> {model.authorBio_o[0].name_s}
+                  <img src={model.authorBio_o[0].profilePic_s} alt="" className="mr-2" /> {model.authorBio_o[0].name_s}
                 </span>
                 {' • '}<span className="mr-2">{formatDate(model.craftercms.dateCreated)}</span>
                 {' • '}<span className="ml-2">

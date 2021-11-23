@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2020 Crafter Software Corporation. All Rights Reserved.
+ * Copyright (C) 2007-2021 Crafter Software Corporation. All Rights Reserved.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published by
@@ -21,12 +21,6 @@ export default function Bio(props) {
   const {
     ice,
     model: {
-      // craftercms: {
-      //   id,
-      //   contentTypeId,
-      //   label,
-      //   path,
-      // },
       bio_t,
       name_s,
       profilePic_s,
@@ -42,7 +36,7 @@ export default function Bio(props) {
   return (
     <>
       <div className="bio text-center" {...ice}>
-        <img src={profilePic_s} alt="" className="img-fluid" layout='fill' />
+        <img src={profilePic_s} alt="" className="img-fluid"  />
         <div className="bio-body">
           <h2>{name_s}</h2>
           <p>{bio_t}</p>
