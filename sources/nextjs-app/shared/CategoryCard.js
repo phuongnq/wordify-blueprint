@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 
 function CategoryCard(props) {
   const {
@@ -25,13 +26,15 @@ function CategoryCard(props) {
   const link = isTag ? 'tag' : 'category'
 
   return(
-    <a href={`/${link}/${category.key}`} className="blog-entry category-card">
-      {
-        category.image_s &&
-        <img className="background" src={category.image_s} alt={category.value}/>
-      }
-      <h2 className="title">{category.value}</h2>
-    </a>
+    <Link href={`/${link}/${category.key}`}>
+      <a className="blog-entry category-card">
+        {
+          category.image_s &&
+          <img className="background" src={category.image_s} alt={category.value}/>
+        }
+        <h2 className="title">{category.value}</h2>
+      </a>
+    </Link>
   )
 }
 

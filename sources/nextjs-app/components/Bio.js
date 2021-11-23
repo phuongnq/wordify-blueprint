@@ -15,7 +15,7 @@
  */
 
 import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 
 export default function Bio(props) {
   const {
@@ -43,35 +43,45 @@ export default function Bio(props) {
           {
             showLinkButton_b &&
             <p>
-              <a href={linkButtonUrl_s} className="btn btn-primary btn-sm rounded">
-                {linkButtonText_s}
-              </a>
+              <Link href={linkButtonUrl_s}>
+                <a className="btn btn-primary btn-sm rounded">
+                  {linkButtonText_s}
+                </a>
+              </Link>
             </p>
           }
           <p className="social">
             {
               facebookLink_s &&
-              <a href={facebookLink_s} className="p-2" target="_blank" rel="noreferrer noopener">
-                <span className="fa fa-facebook" />
-              </a>
+              <Link href={facebookLink_s}>
+                <a className="p-2" target="_blank" rel="noreferrer noopener">
+                  <span className="fa fa-facebook" />
+                </a>
+              </Link>
             }
             {
               twitterLink_s &&
-              <a href={twitterLink_s} className="p-2" target="_blank" rel="noreferrer noopener">
-                <span className="fa fa-twitter" />
-              </a>
+              <Link href={twitterLink_s}>
+                <a className="p-2" target="_blank" rel="noreferrer noopener">
+                  <span className="fa fa-twitter" />
+                </a>
+              </Link>
             }
             {
               instagramLink_s &&
-              <a href={instagramLink_s} className="p-2" target="_blank" rel="noreferrer noopener">
-                <span className="fa fa-instagram" />
-              </a>
+              <Link href={instagramLink_s}>
+                <a className="p-2" target="_blank" rel="noreferrer noopener">
+                  <span className="fa fa-instagram" />
+                </a>
+              </Link>
             }
             {
               youTubeLink_s &&
-              <a href={youTubeLink_s} className="p-2" target="_blank" rel="noreferrer noopener">
-                <span className="fa fa-youtube-play" />
-              </a>
+              <Link href={youTubeLink_s}>
+                <a className="p-2" target="_blank" rel="noreferrer noopener">
+                  <span className="fa fa-youtube-play" />
+                </a>
+              </Link>
             }
           </p>
         </div>

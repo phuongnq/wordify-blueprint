@@ -16,7 +16,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useFooter, usePencil } from '../shared/hooks';
 
 export default function Footer({ socialLinks }) {
@@ -59,10 +58,12 @@ export default function Footer({ socialLinks }) {
                     {
                       socialLinks?.map((link) =>
                         <li key={link.socialNetwork_s}>
-                          <a href={link.url_s} target="_blank" rel="noopener noreferrer">
-                            <span className={'fa fa-' + link.socialNetwork_s}></span>
-                            {link.label_s}
-                          </a>
+                          <Link href={link.url_s}>
+                            <a target="_blank" rel="noopener noreferrer">
+                              <span className={'fa fa-' + link.socialNetwork_s}></span>
+                              {link.label_s}
+                            </a>
+                          </Link>
                         </li>
                       )
                     }

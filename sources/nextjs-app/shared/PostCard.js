@@ -15,6 +15,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import { useIntl } from 'react-intl';
 import { useICE } from '@craftercms/ice/react';
 import { useGlobalContext } from './context';
@@ -36,15 +37,11 @@ function PostCard(props) {
     numOfComments,
     model,
     model: {
-      // pageTitle_s,
-      // pageDescription_s,
-      // authorBio_o,
       authorBio_o: [{
         name_s: authorName,
         profilePic_s: authorAvatarUrl
       }],
       blurb_t,
-      // content_o,
       headline_s,
       mainImage_s,
       mainImageAlt_s = '',
@@ -63,7 +60,8 @@ function PostCard(props) {
   switch (format) {
     case PORTRAIT:
       return (
-        <a href={slug} className={`blog-entry ${classes?.root ?? ''}`} {...ice}>
+        <Link href={slug}>
+          <a className={`blog-entry ${classes?.root ?? ''}`} {...ice}>
           <div className="img-container">
             <img src={mainImage_s} alt={mainImageAlt_s} />
           </div>
@@ -83,83 +81,91 @@ function PostCard(props) {
             <h2>{headline_s}</h2>
           </div>
         </a>
+        </Link>
       );
     case LANDSCAPE:
       return (
         <div className="post-entry-horizontal" {...ice}>
-          <a href={slug} className={classes?.root}>
-            <div className="image" style={{ backgroundImage: `url(${mainImage_s})` }} />
-            <span className="text">
-              <div className="post-meta">
-                <span className="author mr-2">
-                  <img src={authorAvatarUrl} alt="" /> {authorName}
-                </span>
-                • <span className="mr-2">{formatDate(dateModified)}</span>
-                {
-                  numOfComments &&
-                  <>
-                    • <span className="ml-2"><span className="fa fa-comments" /> ${numOfComments}</span>
-                  </>
-                }
-              </div>
-              <h2>{headline_s}</h2>
-            </span>
-          </a>
+          <Link href={slug}>
+            <a className={classes?.root}>
+              <div className="image" style={{ backgroundImage: `url(${mainImage_s})` }} />
+              <span className="text">
+                <div className="post-meta">
+                  <span className="author mr-2">
+                    <img src={authorAvatarUrl} alt="" /> {authorName}
+                  </span>
+                  • <span className="mr-2">{formatDate(dateModified)}</span>
+                  {
+                    numOfComments &&
+                    <>
+                      • <span className="ml-2"><span className="fa fa-comments" /> ${numOfComments}</span>
+                    </>
+                  }
+                </div>
+                <h2>{headline_s}</h2>
+              </span>
+            </a>
+          </Link>
         </div>
       );
     case LANDSCAPE_COMPRESSED:
       return (
-        <a href={slug} className={classes?.root} {...ice}>
-          <img src={mainImage_s} alt={mainImageAlt_s} className="mr-4" />
-          <div className="text">
-            <h4>{headline_s}</h4>
-            <div className="post-meta">
-              <span className="mr-2">{formatDate(dateModified)}</span>
+        <Link href={slug}>
+          <a className={classes?.root} {...ice}>
+            <img src={mainImage_s} alt={mainImageAlt_s} className="mr-4" />
+            <div className="text">
+              <h4>{headline_s}</h4>
+              <div className="post-meta">
+                <span className="mr-2">{formatDate(dateModified)}</span>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        </Link>
       );
     case IMAGE_BACKGROUND:
       return (
-        <a
-          href={slug}
-          className={`a-block d-flex align-items-center ${classes?.root ?? ''}`}
-          style={{ backgroundImage: `url(${mainImage_s})` }}
-        >
-          <div className={`text ${classes?.innerWrapper}`} {...ice}>
-            <div className="post-meta">
+        <Link href={slug}>
+          <a
+            className={`a-block d-flex align-items-center ${classes?.root ?? ''}`}
+            style={{ backgroundImage: `url(${mainImage_s})` }}
+          >
+            <div className={`text ${classes?.innerWrapper}`} {...ice}>
+              <div className="post-meta">
+                {
+                  categories_o &&
+                  <>
+                    {
+                      categories_o?.map(category =>
+                        <span className="category" key={category.key}>{category.value_smv}</span>
+                      )
+                    }
+                    {' • '}
+                  </>
+                }
+                <span className="mr-2">{formatDate(dateModified)}</span>
+                {
+                  numOfComments &&
+                  <>
+                    {' • '}<span className="ml-2"><span className="fa fa-comments"/> {numOfComments}</span>
+                  </>
+                }
+              </div>
+              <h3>{headline_s.text??headline_s}</h3>
               {
-                categories_o &&
-                <>
-                  {
-                    categories_o?.map(category =>
-                      <span className="category" key={category.key}>{category.value_smv}</span>
-                    )
-                  }
-                  {' • '}
-                </>
-              }
-              <span className="mr-2">{formatDate(dateModified)}</span>
-              {
-                numOfComments &&
-                <>
-                  {' • '}<span className="ml-2"><span className="fa fa-comments"/> {numOfComments}</span>
-                </>
+                showBlurb && <p>{blurb_t}</p>
               }
             </div>
-            <h3>{headline_s.text??headline_s}</h3>
-            {
-              showBlurb && <p>{blurb_t}</p>
-            }
-          </div>
-        </a>
+          </a>
+        </Link>
       );
     default:
       console.error(`Unknown PostCard format "${format}" on post "${headline_s}"`);
       return (
-        <a href={slug} className={classes?.root} {...ice}>
-          <h2>{headline_s}</h2>
-        </a>
+        <Link href={slug}>
+          <a className={classes?.root} {...ice}>
+            <h2>{headline_s}</h2>
+          </a>
+        </Link>
       );
   }
 }

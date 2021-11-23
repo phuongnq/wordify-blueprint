@@ -14,8 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, Suspense, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
 import { parseDescriptor } from '@craftercms/content';
 import BaseLayout from '../../shared/BaseLayout';
 import RecentPostsAside from '../../shared/RecentPostsAside';
@@ -129,6 +128,8 @@ function Category(props) {
   useEffect(() => {
     if (match.path === '/category/:id?' || match.path === '/tag/:id?') {
       setCategoryId(match.params.id);
+    } else {
+      setCategoryId(null);
     }
   }, [match.params, match.path]);
 

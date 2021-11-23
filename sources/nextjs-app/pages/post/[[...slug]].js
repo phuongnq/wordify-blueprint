@@ -15,7 +15,7 @@
  */
 
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 import BaseLayout from '../../shared/BaseLayout';
 import ContentType from '../../shared/ContentType';
 import RecentPostsAside from '../../shared/RecentPostsAside';
@@ -76,7 +76,7 @@ function Post(props) {
               <h1 className="mb-4">{model.headline_s}</h1>
               {
                 model.categories_o?.map(category =>
-                  <a className="category mb-5" href={`/category/${category.key}`} key={category.key}>{category.value_smv}</a>
+                  <Link href={`/category/${category.key}`} key={category.key}><a className="category mb-5" >{category.value_smv}</a></Link>
                 )
               }
 
@@ -104,7 +104,7 @@ function Post(props) {
                     Categories:
                     {
                       model.categories_o.map((category, i) =>
-                        <a href={`/category/${category.key}`} key={category.key}>{category.value_smv}{model.categories_o.length === i+1 ? '' : ','}</a>
+                        <Link href={`/category/${category.key}`} key={category.key}><a>{category.value_smv}{model.categories_o.length === i+1 ? '' : ','}</a></Link>
                       )
                     }
                   </div>
@@ -115,7 +115,7 @@ function Post(props) {
                     Tags:
                     {
                       model.tags_o.map((tag, i) =>
-                        <a href={`/tag/${tag.key}`} key={tag.key}>#{tag.value_smv}{model.tags_o.length === i+1 ? '' : ','}</a>
+                        <Link href={`/tag/${tag.key}`} key={tag.key}><a>#{tag.value_smv}{model.tags_o.length === i+1 ? '' : ','}</a></Link>
                       )
                     }
                   </div>
