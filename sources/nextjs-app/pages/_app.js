@@ -14,8 +14,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Script from 'next/script';
+import Head from 'next/head';
 import { addAuthoringSupport, fetchIsAuthoring } from '@craftercms/ice';
 import { GlobalContextProvider } from '../shared/context';
 import AppIntl from '../shared/AppIntl';
@@ -33,6 +34,9 @@ function App({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <title>Wordify Crafter CMS</title>
+      </Head>
       <Script
         src="/static-assets/js/jquery-3.2.1.min.js"
         strategy="beforeInteractive"
