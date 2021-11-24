@@ -133,13 +133,8 @@ function Search(props) {
 }
 
 export async function getServerSideProps(context) {
-  const url = '/search';
-  const limit = 8;
-  const page = 0;
-
-  const props = await getProps(url, limit, page);
-  const taxonomiesResource = await getTaxonomiesResource();
-  props.taxonomiesResource = taxonomiesResource;
+  const props = await getProps('/search');
+  props.taxonomiesResource = await getTaxonomiesResource();
 
   const searchQuery = context.query.q ?? '';
   const searchPage = context.query.p ?? 0;

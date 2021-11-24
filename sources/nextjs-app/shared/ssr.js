@@ -19,7 +19,10 @@ import { parseDescriptor } from '@craftercms/content';
 import { fetchQuery } from '../fetchQuery';
 import byUrlQuery from '../shared/queries.graphql';
 
-export async function getProps(url, limit, page) {
+const DEFAULT_LIMIT = 8;
+const DEFAULT_PAGE = 0;
+
+export async function getProps(url, limit = DEFAULT_LIMIT, page = DEFAULT_PAGE) {
   const pagination = { limit, offset: page ? (page * limit) : 0 };
   const res = await fetchQuery(
     { text: byUrlQuery },

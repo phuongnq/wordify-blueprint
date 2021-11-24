@@ -130,13 +130,8 @@ function Home(props) {
 }
 
 export async function getServerSideProps() {
-  const url = '/';
-  const limit = 8;
-  const page = 0;
-
-  const props = await getProps(url, limit, page);
-  const taxonomiesResource = await getTaxonomiesResource();
-  props.taxonomiesResource = taxonomiesResource;
+  const props = await getProps('/');
+  props.taxonomiesResource = await getTaxonomiesResource();
 
   return { props };
 }

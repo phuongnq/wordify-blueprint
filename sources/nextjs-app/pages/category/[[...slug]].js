@@ -161,16 +161,13 @@ function Category(props) {
 
 export async function getServerSideProps(context) {
   const { slug } = context.query;
-  const path = slug ? '/category/:id?' : '/category';
+  const path = slug ? '/category/:id?' : '/category'; // map to /category/:id? for client side logic
   const params = slug ? { id: slug[0] } : {};
   const url = '/category';
-  const limit = 8;
-  const page = 0;
 
-  const props = await getProps(url, limit, page);
+  const props = await getProps(url);
   props.match = { path, params };
-  const taxonomiesResource = await getTaxonomiesResource();
-  props.taxonomiesResource = taxonomiesResource;
+  props.taxonomiesResource = await getTaxonomiesResource();
 
   return { props };
 }

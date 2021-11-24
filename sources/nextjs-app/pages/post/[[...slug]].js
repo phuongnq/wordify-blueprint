@@ -192,12 +192,8 @@ function Post(props) {
 
 export async function getServerSideProps(context) {
   const url = `/post/${context.query.slug.join('/')}`;
-  const limit = 1;
-  const page = 0;
-
-  const props = await getProps(url, limit, page);
-  const taxonomiesResource = await getTaxonomiesResource();
-  props.taxonomiesResource = taxonomiesResource;
+  const props = await getProps(url);
+  props.taxonomiesResource = await getTaxonomiesResource();
 
   return { props };
 }
