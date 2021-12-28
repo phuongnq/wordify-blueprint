@@ -12,19 +12,16 @@
     "@craftercms/content": "^1.2.4",
     "@craftercms/ice": "^1.2.4",
     "@craftercms/search": "^1.2.4",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "js-cookie": "^2.2.1",
-    "next": "12.0.4",
-    "query-string": "^6.12.1",
+    "js-cookie": "^3.0.1",
+    "next": "^12.0.7",
+    "query-string": "^7.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-intl": "^4.2.2",
-    "react-paginate": "^7.0.0",
-    "react-relay": "^9.0.0",
-    "react-router-dom": "^6.0.2",
-    "react-scripts": "^4.0.1"
+    "react-intl": "^5.24.0",
+    "react-paginate": "^8.1.0",
+    "react-relay": "^12.0.0",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "^5.0.0"
   },
   "browserslist": {
     "production": [
@@ -39,7 +36,7 @@
     ]
   },
   "devDependencies": {
-    "eslint": "7",
-    "eslint-config-next": "12.0.4"
+    "eslint": "^8.5.0",
+    "eslint-config-next": "^12.0.7"
   }
 }
